@@ -73,7 +73,11 @@ namespace WebdriverClass
         }
         static IEnumerable TestData()
         {
-            var doc = XElement.Load(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory) + "\\test.xml");
+            var projectRoot = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\"));
+
+            var filePath = System.IO.Path.Combine(projectRoot, "test.xml");
+
+            var doc = XElement.Load(filePath);
             return
                 from vars in doc.Descendants("testData")
                 let search = vars.Attribute("search").Value
